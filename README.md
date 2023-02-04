@@ -6,6 +6,9 @@ A clicker game, demo version. Special design for the theme is the numbers in the
 
 This is the first time I use my idle-framework with html-subproject. This project is a short demo version for testing the idle-framework abilities and the html exported. 
 
+![](./docs/1.png)
+![](./docs/2.png)
+
 ### release
 
 Desktop: Run desktop-subproject java main.
