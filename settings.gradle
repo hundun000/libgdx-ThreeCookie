@@ -1,0 +1,4 @@
+rootProject.name = 'libgdx-ThreeCookie'
+include 'desktop'
+include 'core'
+include 'html'

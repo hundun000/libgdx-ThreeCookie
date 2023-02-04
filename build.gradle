@@ -1,0 +1,86 @@
+buildscript {
+    ext {
+        gwtPluginVersion = '1.1.16'
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        //maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        google()
+    }
+    dependencies {
+        classpath "org.wisepersist:gwt-gradle-plugin:$gwtPluginVersion"
+        classpath 'org.gretty:gretty:3.0.5'
+    }
+}
+
+allprojects {
+    apply plugin: "idea"
+    apply plugin: "eclipse"
+    apply plugin: "java"
+    apply plugin: 'java-library'
+    
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    
+    
+    ext {
+        appName = "libgdx-ThreeCookie"
+    
+//       gdxVersion = '1.10.0'
+//        roboVMVersion = '2.3.12'
+//        box2DLightsVersion = '1.5'
+//        ashleyVersion = '1.7.3'
+//        aiVersion = '1.8.2'
+//        gdxControllersVersion = '2.1.0'
+        idleframeVersion = 'f09ea5ac19'
+        
+        gwtFrameworkVersion = '2.8.2'
+    }
+
+    repositories {
+        //mavenLocal()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        //google()
+        //maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        //maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+    }
+
+}
+
+
+
+
+project(":core") {
+    
+    dependencies {
+        implementation "com.github.hundun000.hundun-idle-all:idleframe:$idleframeVersion"
+    }
+}
+
+project(":desktop") {
+
+    dependencies {
+        implementation project(":core")
+        implementation "com.github.hundun000.hundun-idle-all:desktop-idleshare:$idleframeVersion"
+
+    }
+}
+
+project(":html") {
+    apply plugin: "gwt"
+    apply plugin: "war"
+    apply plugin: "org.gretty"
+
+    dependencies {
+        implementation project(':core')
+        implementation "com.github.hundun000.hundun-idle-all:html-idleshare:$idleframeVersion"
+        implementation "com.github.hundun000.hundun-idle-all:html-idleshare:$idleframeVersion:sources"
+    }
+}
+
+eclipse.project.name = appName
